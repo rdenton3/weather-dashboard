@@ -1,0 +1,8 @@
+.hero {
+    background-image: linear-gradient(to right, rgba(1,1,122,.4), rgba(1,1,122,1));
+}
+
+.title {
+    color: white;
+    text-align: center;
+}

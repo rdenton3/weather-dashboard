@@ -4,10 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <title>Weather Dashboard</title>
 </head>
 <body>
+    <header class="hero">
+        <h1 class="title">Weather Dashboard</h1>
+    </header>
+
+    <main>
+        <div class="card"></div>
+        <h2 class="card-header text-uppercase">Search for a City</h2>
+        <form id="user-form" class="card-body">
+            <input name="city" id="city" type="text" autofocus="true" class="form-input" />
+            <button type="submit" class="btn">Submit</button>
+        </form>
+    </main>
  
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
     <script src="./assets/js/script.js"></script>
 </body>
 </html>
