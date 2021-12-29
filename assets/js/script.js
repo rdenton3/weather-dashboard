@@ -7,7 +7,8 @@ var dailyWindEl = document.querySelector("#wind")
 var dailyHumidEl = document.querySelector("#humid")
 var dailyUviEl = document.querySelector("#uvi")
 var dateEl = document.querySelector("#today")
-forecastContainer = document.querySelector(".forecasts")
+var forecastContainer = document.querySelector(".forecasts")
+// var iconEl = document.querySelector("#icon")
 
 var formSubmit = function(event) {
     event.preventDefault();
@@ -39,17 +40,47 @@ var cityPull = function(city){
     })
 
 }
+
+// function to call icon depending on weather that day
+var callIcon = function(weather) {
+    if (weather === "Clear") {
+        var dispIcon = "fas fa-sun"
+        return dispIcon
+    }
+    else if (weather === "Clouds") {
+        var dispIcon = "fas fa-cloud-sun"
+        return dispIcon
+    }
+    else if (weather === "Rain") {
+        var dispIcon = "fas fa-cloud-rain"
+        return dispIcon
+    }
+    else if (weather === "Mist" || weather === "Fog") {
+        var dispIcon = "fas fa-smog"
+        return dispIcon
+    }
+}
+
 // call weather function dynamically based on user inputs
 var weatherPull = function(lat, lon) {
     var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&exclude=hourly,minutely&appid=50ee644cfafc3cd04f5298fe9bd700dd"
     fetch(apiUrl).then(function(response){
         response.json().then(function(data){
+            console.log(data)
             // grab all current data and display
             var temp = data.current.temp
             var wind = data.current.wind_speed
             var humid = data.current.humidity
             var uvi = data.current.uvi
             displayWeather(temp,wind,humid,uvi)
+            var conditions = data.current.weather[0].main
+            console.log(conditions)
+            // create weather icon
+            var iconEl = document.createElement("span")
+            var classIcon = callIcon(conditions)
+            iconEl.classList = classIcon
+            dateEl.appendChild(iconEl)
+            // iconEl.classList = "fas fa-bolt"
             // grab forecasted data
             console.log(data)
             // loop over forecasted data and dispay on page
@@ -79,7 +110,6 @@ var weatherPull = function(lat, lon) {
                 forecastEl.append(dispTemp,dispWind,dispHumid,dispUvi)
                 // append to html
                 forecastContainer.appendChild(forecastEl)
-
             }
         })
     })
