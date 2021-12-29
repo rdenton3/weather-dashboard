@@ -12,12 +12,12 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Weather Dashboard</title>
 </head>
-<body>
+<body class="flex-column min-100-vh">
     <header class="hero">
         <h1 class="title">Weather Dashboard</h1>
     </header>
 
-    <main class="flex-row">
+    <main class="flex-row justify-space-between">
         <div class="col-12 col-md-4">
             <div class="card">
                 <h2 class="card-header text-uppercase">Search for a City</h2>
@@ -27,11 +27,24 @@
                 </form>
             </div>
         </div>
+
         <div class="col-12 col-md-8">
-            <h2 class="subtitle">Showing Weather for: <span id="city-search"></span></h2>
+            <h2 class="subtitle">Showing Weather for: <span id="city-search">   </span><span id="today"></span></h2>
             <div id="display-container" class="list-group"></div>
-          </div>
+            <p> Temperature: <span id="temp"></span></p>
+            <p> Wind: <span id="wind"></span></p>
+            <p> Humidity: <span id="humid"></span></p>
+            <p> UV Index: <span id="uvi"></span></p>
+        </div>
+
+        <div>
+            <h3>5 Day Forecast</h3>
+            <div class="forecasts">
+            </div>
+        </div>
+        
     </main>
+
 
  
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
