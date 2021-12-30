@@ -23,11 +23,17 @@
     background-color: lightblue;
 }
 
+.btn2 {
+    background-color: lightblue;
+    border-radius: 15px;
+    width: 180px;
+    text-align: center;
+}
+
 .showDaily {
     padding-left: 40px;
 }
 
-.forecastCard {
-    background-color: navy;
-    color: white;
-}
+ul {
+    list-style-type: none;
+  }

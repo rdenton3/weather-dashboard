@@ -8,6 +8,22 @@ var dailyHumidEl = document.querySelector("#humid")
 var dailyUviEl = document.querySelector("#uvi")
 var dateEl = document.querySelector("#today")
 var forecastContainer = document.querySelector(".forecasts")
+var citiesEl = document.querySelector("#cities")
+
+var cityStorage = function(city) {
+   //check if cities array already exist, else create an array
+   var storedCities = JSON.parse(localStorage.getItem("storedCities")) || []
+   // put new city into an object
+   var newCity = {city: city}
+   // push object into an array
+   storedCities.push(newCity)
+   // save to local storage
+   localStorage.setItem("storedCities", JSON.stringify(storedCities))
+}
+
+var getSavedCities = function() {
+    
+}
 
 var formSubmit = function(event) {
     event.preventDefault();
@@ -19,6 +35,15 @@ var formSubmit = function(event) {
         // then clear form input
         displayContainerEl.textContent = ""
         cityInputEl.value = "";
+        // then create a button element to display on the page and append to page
+        citiesButton = document.createElement("button")
+        citiesLi = document.createElement("li")
+        citiesButton.innerHTML = city
+        citiesButton.classList = "btn2"
+        citiesLi.appendChild(citiesButton)
+        citiesEl.appendChild(citiesLi)
+        // save searches into local storage
+        cityStorage(city)
     }
     else {
         alert("Please enter a city name.")
@@ -100,6 +125,8 @@ var weatherPull = function(lat, lon) {
             dateEl.appendChild(iconEl)
             // grab forecasted data
             console.log(data)
+            // remove data from any previous loads
+            forecastContainer.innerHTML = ""
             // loop over forecasted data and dispay on page
             for (i=1; i < 6; i++) {
                 // collect weather variables
