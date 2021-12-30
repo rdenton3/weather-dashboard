@@ -9,6 +9,7 @@ var dailyUviEl = document.querySelector("#uvi")
 var dateEl = document.querySelector("#today")
 var forecastContainer = document.querySelector(".forecasts")
 var citiesEl = document.querySelector("#cities")
+var savedCityBtn = document.querySelector(".btn2")
 
 var cityStorage = function(city) {
    //check if cities array already exist, else create an array
@@ -33,12 +34,13 @@ var getSavedCities = function() {
         var savedCityName = savedCities[i].city
         console.log(savedCityName)
         citiesButton.innerHTML = savedCityName
+        citiesButton.setAttribute("city-name", savedCities[i].city)
         citiesButton.classList = "btn2"
         citiesLi.appendChild(citiesButton)
         citiesEl.appendChild(citiesLi)
     }
 }
-getSavedCities()
+
 var formSubmit = function(event) {
     event.preventDefault();
     // get value from the form input
@@ -53,6 +55,7 @@ var formSubmit = function(event) {
         citiesButton = document.createElement("button")
         citiesLi = document.createElement("li")
         citiesButton.innerHTML = city
+        citiesButton.setAttribute("city-name", city)
         citiesButton.classList = "btn2"
         citiesLi.appendChild(citiesButton)
         citiesEl.appendChild(citiesLi)
@@ -61,6 +64,16 @@ var formSubmit = function(event) {
     }
     else {
         alert("Please enter a city name.")
+    }
+}
+// load weather data from saved cities
+var loadCities = function(event) {
+    event.preventDefault();
+    // pull the attribute
+    var city = event.target.getAttribute("city-name");
+    console.log(city)
+    if (city) {
+        cityPull(city)
     }
 }
 
@@ -95,6 +108,10 @@ var callIcon = function(weather) {
     }
     else if (weather === "Mist" || weather === "Fog") {
         var dispIcon = "fas fa-smog"
+        return dispIcon
+    }
+    else if (weather === "Snow") {
+        var dispIcon = "fas fa-snowflake"
         return dispIcon
     }
 }
@@ -196,5 +213,8 @@ var displayWeather = function(temp,wind,humid,uvi) {
     dailyUviEl.textContent = uvi
 }
 
-formEl.addEventListener("submit", formSubmit)
 
+formEl.addEventListener("submit", formSubmit)
+citiesEl.addEventListener("click", loadCities)
+// load saved cities in local storage
+getSavedCities()
