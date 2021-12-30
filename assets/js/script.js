@@ -22,9 +22,23 @@ var cityStorage = function(city) {
 }
 
 var getSavedCities = function() {
-    
+    var savedCities = localStorage.getItem("storedCities")
+    // parse into array of objects
+    savedCities  = JSON.parse(savedCities)
+    // loop through saved cities and display them on page
+    for (i=0; i< savedCities.length; i++){
+        // create button + li element
+        citiesButton = document.createElement("button")
+        citiesLi = document.createElement("li")
+        var savedCityName = savedCities[i].city
+        console.log(savedCityName)
+        citiesButton.innerHTML = savedCityName
+        citiesButton.classList = "btn2"
+        citiesLi.appendChild(citiesButton)
+        citiesEl.appendChild(citiesLi)
+    }
 }
-
+getSavedCities()
 var formSubmit = function(event) {
     event.preventDefault();
     // get value from the form input
