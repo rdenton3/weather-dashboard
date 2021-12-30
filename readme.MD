@@ -26,6 +26,6 @@ THEN I am again presented with current and future conditions for that city
 https://rdenton3.github.io/weather-dashboard/
 
 ## Photos
-![Weather Dashboard](./images/site1.png)
+![Weather Dashboard](./assets/images/site1.png)
 
 
