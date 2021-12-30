@@ -8,7 +8,6 @@ var dailyHumidEl = document.querySelector("#humid")
 var dailyUviEl = document.querySelector("#uvi")
 var dateEl = document.querySelector("#today")
 var forecastContainer = document.querySelector(".forecasts")
-// var iconEl = document.querySelector("#icon")
 
 var formSubmit = function(event) {
     event.preventDefault();
@@ -61,6 +60,22 @@ var callIcon = function(weather) {
     }
 }
 
+// function to color code uv index
+var uviColor = function(uvi) {
+    if (uvi < 3) {
+        var uvClass = "green"
+        return uvClass
+    } 
+    else if (uvi > 3 && uvi <7) {
+        var uvClass = "yellow"
+        return uvClass 
+    }
+    else {
+        uvClass = "red"
+        return uvClass
+    }
+}
+
 // call weather function dynamically based on user inputs
 var weatherPull = function(lat, lon) {
     var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&exclude=hourly,minutely&appid=50ee644cfafc3cd04f5298fe9bd700dd"
@@ -74,13 +89,15 @@ var weatherPull = function(lat, lon) {
             var uvi = data.current.uvi
             displayWeather(temp,wind,humid,uvi)
             var conditions = data.current.weather[0].main
-            console.log(conditions)
+            // get color of uvi 
+            setUv = uviColor(uvi)
+            console.log(setUv)
+            dailyUviEl.classList = setUv
             // create weather icon
             var iconEl = document.createElement("span")
             var classIcon = callIcon(conditions)
             iconEl.classList = classIcon
             dateEl.appendChild(iconEl)
-            // iconEl.classList = "fas fa-bolt"
             // grab forecasted data
             console.log(data)
             // loop over forecasted data and dispay on page
@@ -90,14 +107,20 @@ var weatherPull = function(lat, lon) {
                 var forecastWind = data.daily[i].wind_speed
                 var forecastHumid = data.daily[i].humidity
                 var forecastUvi = data.daily[i].uvi
+                var fConditions = data.daily[i].weather[0].main
                 // set the date 
                 var day = moment().add(i,'d').format("MM-DD-YYYY")
-                console.log(day)
+                // get color of uvi 
+                setUvi = uviColor(forecastUvi)
+                // get forecast icon
+                var fIcon = callIcon(fConditions)
                 // create container for each weather variable
                 var forecastEl = document.createElement("div")
-                forecastEl.classList = "card"
+                forecastEl.classList = "card col btn"
                 forecastEl.textContent = day
                 // create span element to display the weather variable
+                var forecastIconEl = document.createElement("div")
+                forecastIconEl.classList = fIcon
                 var dispTemp = document.createElement("div")
                 dispTemp.textContent = "Temp: " + forecastTemp
                 var dispWind = document.createElement("div")
@@ -106,8 +129,9 @@ var weatherPull = function(lat, lon) {
                 dispHumid.textContent = "Humidity: " + forecastHumid
                 var dispUvi = document.createElement("div")
                 dispUvi.textContent = "UVI: " + forecastUvi
+                dispUvi.classList = setUvi
                 // append to div container
-                forecastEl.append(dispTemp,dispWind,dispHumid,dispUvi)
+                forecastEl.append(forecastIconEl,dispTemp,dispWind,dispHumid,dispUvi)
                 // append to html
                 forecastContainer.appendChild(forecastEl)
             }

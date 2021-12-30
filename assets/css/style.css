@@ -6,3 +6,28 @@
     color: white;
     text-align: center;
 }
+
+.green {
+    color: green;
+}
+
+.yellow {
+    color: orange;
+}
+
+.red {
+    color: red;
+}
+
+.btn {
+    background-color: lightblue;
+}
+
+.showDaily {
+    padding-left: 40px;
+}
+
+.forecastCard {
+    background-color: navy;
+    color: white;
+}

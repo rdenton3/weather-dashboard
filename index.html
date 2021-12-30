@@ -23,10 +23,11 @@
         <h1 class="title">Weather Dashboard</h1>
     </header>
 
-    <main class="flex-row justify-space-between">
-        <div class="col-12 col-md-4">
+    <main class="container">
+        <div class="row">
+        <div class="col-xs-6">
             <div class="card">
-                <h2 class="card-header text-uppercase">Search for a City</h2>
+                <h2 class="card-header">Search for a City</h2>
                 <form id="user-form" class="card-body">
                     <input name="city" id="city" type="text" autofocus="true" class="form-input" />
                     <button type="submit" class="btn">Submit</button>
@@ -34,25 +35,23 @@
             </div>
         </div>
 
-        <div class="col-12 col-md-8">
-            <h2 class="subtitle">Showing Weather for:<span id="city-search"></span><span id="today"></span></h2>
-            <div id="display-container" class="list-group"></div>
+        <div class="col-xs-6 showDaily">
+            <h2 class="subtitle">Showing Weather for: <span id="city-search"></span><span id="today"></span></h2>
+            <div id="display-container" class="list-group showDaily"></div>
             <p> Temperature: <span id="temp"></span></p>
             <p> Wind: <span id="wind"></span></p>
             <p> Humidity: <span id="humid"></span></p>
             <p> UV Index: <span id="uvi"></span></p>
         </div>
-
+    </div>
         <div>
             <h3>5 Day Forecast</h3>
-            <div class="forecasts">
+            <div class="forecasts row">
             </div>
         </div>
         
     </main>
 
-
- 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
